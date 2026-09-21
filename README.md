@@ -534,10 +534,11 @@ bc250-bluetooth-controller/
 ├── LICENSE
 ├── .gitignore
 ├── firmware/
-│   ├── app.py
-│   ├── main.py
-│   ├── config.example.py
-│   ├── secrets.example.py
+|   ├── app.py
+|   ├── boot.py
+|   ├── main.py
+|   ├── config.py
+|   ├── secrets.example.py
 │   └── www/
 │       ├── index.html
 │       ├── style.css
@@ -638,11 +639,9 @@ Not required for v1.0:
 
 ## License
 
-Choose a license before publishing.
+This project is licensed under the MIT License.
 
-For a small hardware / firmware utility intended for community reuse, **MIT** is a simple permissive option for the software.
-
-If hardware design files / schematics are added later, you may want a separate hardware-specific license for those files.
+See the [LICENSE](LICENSE) file for the full license text.
 
 ---
 

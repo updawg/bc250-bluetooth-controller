@@ -473,7 +473,7 @@ PIN_PS_ON = 5
 
 Confirm the XIAO remains powered while the main PSU rails are off.
 
-Then verify the GPIO5 / 2N2222A PS_ON circuit according to `hardware/wiring.md`.
+Then verify the GPIO5 / 2N2222A PS_ON circuit according to [`../hardware/wiring.md`](../hardware/wiring.md).
 
 ---
 
