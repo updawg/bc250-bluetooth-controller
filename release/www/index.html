@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
+    <title>BC-250 Controller</title>
+
+    <link
+        rel="stylesheet"
+        href="/style.css"
+    >
+</head>
+
+<body>
+
+    <main>
+
+        <header>
+            <h1>BC-250 Controller</h1>
+            <p>XIAO ESP32-C3 Management Controller</p>
+        </header>
+
+
+        <section class="card">
+
+            <h2>System</h2>
+
+            <div class="row">
+                <span>BC-250</span>
+                <strong
+                    id="system-state"
+                    class="good"
+                >
+                    Loading...
+                </strong>
+            </div>
+
+            <div class="row">
+                <span>PSU</span>
+                <strong id="psu-state">
+                    Loading...
+                </strong>
+            </div>
+
+            <div class="row">
+                <span>ESP Address</span>
+                <strong id="ip-address">
+                    Loading...
+                </strong>
+            </div>
+
+        </section>
+
+
+        <section class="card">
+
+            <div class="heading-row">
+                <div>
+                    <h2>Wake Controllers</h2>
+                    <p
+                        id="controller-count"
+                        class="muted"
+                    ></p>
+                </div>
+            </div>
+
+            <div id="controllers">
+                Loading...
+            </div>
+
+        </section>
+
+
+        <section class="card">
+
+            <h2>Add Controller</h2>
+
+            <label>
+                Name
+                <input
+                    id="new-name"
+                    type="text"
+                    placeholder="New Controller"
+                >
+            </label>
+
+            <label>
+                MAC address
+                <input
+                    id="new-mac"
+                    type="text"
+                    placeholder="AA:BB:CC:DD:EE:FF"
+                >
+            </label>
+
+            <button
+                class="primary"
+                onclick="addManualController()"
+            >
+                Add Controller
+            </button>
+
+        </section>
+
+
+        <section class="card">
+
+            <div class="heading-row">
+
+                <div>
+                    <h2>Nearby Bluetooth Devices</h2>
+                    <p class="muted">
+                        Turn the controller on, then scan.
+                    </p>
+                </div>
+
+                <button
+                    id="scan-button"
+                    class="primary"
+                    onclick="startScan()"
+                >
+                    Scan
+                </button>
+
+            </div>
+
+            <div id="scan-status"></div>
+
+            <div id="scan-results">
+                No scan performed yet.
+            </div>
+
+        </section>
+
+
+        <div
+            id="toast"
+            class="toast"
+        ></div>
+
+    </main>
+
+
+    <script src="/app.js"></script>
+
+</body>
+
+</html>
+

@@ -1,0 +1,298 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #111;
+    color: #eee;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+}
+
+main {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding: 24px;
+}
+
+header {
+    margin-bottom: 22px;
+}
+
+h1 {
+    margin: 0 0 6px;
+    font-size: 2rem;
+}
+
+h2 {
+    margin: 0 0 14px;
+    font-size: 1.25rem;
+}
+
+p {
+    margin: 0;
+}
+
+header p,
+.muted {
+    color: #999;
+}
+
+.card {
+    background: #222;
+
+    border: 1px solid #333;
+    border-radius: 14px;
+
+    padding: 18px;
+
+    margin-bottom: 18px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+
+    padding: 11px 0;
+
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.row:last-child {
+    border-bottom: none;
+}
+
+.heading-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+
+    margin-bottom: 12px;
+}
+
+.good {
+    color: #74df7b;
+}
+
+.bad {
+    color: #ff7777;
+}
+
+.controller,
+.device {
+    padding: 14px 0;
+
+    border-bottom: 1px solid #3a3a3a;
+}
+
+.controller:last-child,
+.device:last-child {
+    border-bottom: none;
+}
+
+.controller-title,
+.device-title {
+    font-weight: 650;
+}
+
+.mac,
+.rssi {
+    color: #aaa;
+    font-size: 0.88rem;
+    margin-top: 3px;
+}
+
+.actions {
+    display: flex;
+    gap: 8px;
+
+    margin-top: 10px;
+
+    flex-wrap: wrap;
+}
+
+label {
+    display: block;
+
+    color: #bbb;
+
+    margin-bottom: 14px;
+}
+
+input {
+    display: block;
+    width: 100%;
+
+    margin-top: 6px;
+
+    padding: 11px 12px;
+
+    color: #eee;
+    background: #151515;
+
+    border: 1px solid #444;
+    border-radius: 8px;
+
+    font-size: 1rem;
+}
+
+button {
+    appearance: none;
+
+    border: none;
+    border-radius: 8px;
+
+    padding: 10px 14px;
+
+    font-size: 0.95rem;
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+button.primary {
+    color: #111;
+    background: #78df7d;
+}
+
+button.secondary {
+    color: #eee;
+    background: #444;
+}
+
+button.danger {
+    color: white;
+    background: #9d3535;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: default;
+}
+
+.scan-status {
+    color: #aaa;
+    margin: 8px 0 12px;
+}
+
+.toast {
+    position: fixed;
+
+    bottom: 22px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    background: #333;
+    color: white;
+
+    border-radius: 10px;
+
+    padding: 12px 18px;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transition: opacity 0.2s;
+}
+
+.toast.visible {
+    opacity: 1;
+}
+
+@media (max-width: 520px) {
+
+    main {
+        padding: 16px;
+    }
+
+    .heading-row {
+        align-items: flex-start;
+    }
+
+    .row {
+        align-items: flex-start;
+    }
+}
+
+.device-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.new-badge {
+    display: inline-block;
+
+    padding: 3px 8px;
+
+    border-radius: 999px;
+
+    background: #78df7d;
+    color: #111;
+
+    font-size: 0.72rem;
+    font-weight: 800;
+
+    letter-spacing: 0.04em;
+}
+
+.device-new {
+    border-left: 3px solid #78df7d;
+
+    padding-left: 12px;
+}
+
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+
+    gap: 6px;
+
+    margin-top: 9px;
+}
+
+.chip {
+    display: inline-block;
+
+    padding: 4px 8px;
+
+    border-radius: 999px;
+
+    background: #383838;
+    color: #ddd;
+
+    font-size: 0.78rem;
+}
+
+.controller-chip {
+    background: #315f35;
+    color: #b8f2bb;
+}
+
+.metadata-line {
+    margin-top: 7px;
+
+    color: #aaa;
+
+    font-size: 0.82rem;
+}
+
+.service-list {
+    margin-top: 7px;
+
+    color: #888;
+
+    font-size: 0.78rem;
+
+    line-height: 1.4;
+}
+
