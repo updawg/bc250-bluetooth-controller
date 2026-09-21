@@ -6,7 +6,7 @@ This project uses a **Seeed Studio XIAO ESP32-C3** running **MicroPython**. The 
 
 It was built around a BC-250 running Bazzite, but the controller logic is intentionally separated from the OS. The ESP only needs a reliable "system running" sense signal and access to the PSU / motherboard power-control lines.
 
-> **Status:** v1.0 candidate  
+> **Status:** v1.0   
 > Tested on XIAO ESP32-C3 + MicroPython 1.28.0.  
 > The project is functional and has been stress-tested with repeated BLE scans, controller add/remove cycles, controller wake, and normal shutdown behavior.
 
@@ -73,7 +73,7 @@ The ESP also prints its numeric IP address to the serial console as a fallback.
 
 ## Hardware
 
-### Tested controller
+### Tested microcontroller
 
 - **Seeed Studio XIAO ESP32-C3**
 
