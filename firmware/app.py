@@ -1,4 +1,4 @@
-from machine import Pin
+from machine import Pin, PWM
 from time import sleep_ms, ticks_ms, ticks_diff
 import bluetooth
 import network
@@ -11,9 +11,11 @@ from config import (
     PIN_BC250_SENSE,
     PIN_CASE_BUTTON,
     PIN_PS_ON,
+    PIN_LED,
     DEBOUNCE_MS,
     BC250_PRESS_MS,
     FORCE_OFF_HOLD_MS,
+    FORCE_OFF_PRESS_MS,
     STARTUP_GRACE_MS,
     WAKE_RSSI_MIN,
     WAKE_HITS_REQUIRED,
@@ -58,6 +60,30 @@ ps_on = Pin(
     Pin.OUT,
     value=0
 )
+
+# Ring LED (J6) and onboard status LED through a low-side MOSFET, active high.
+# Hardware PWM, so animating it costs the main loop nothing.
+led = PWM(
+    Pin(PIN_LED, Pin.OUT, value=0),
+    freq=1000,
+    duty_u16=0
+)
+
+
+def update_led(system_on):
+    """Solid: BC-250 running. 4 Hz blink: starting or shutting down.
+    Slow breathe: listening for a wake controller. Dim: idle."""
+    if system_on:
+        led.duty_u16(65535)
+    elif startup_started is not None or shutdown_requested:
+        led.duty_u16(65535 if (ticks_ms() // 125) & 1 else 0)
+    elif ble_scanning and scan_mode == "wake":
+        t = ticks_ms() % 3000
+        tri = t if t < 1500 else 3000 - t
+        led.duty_u16(min(65535, (tri * tri) // 34))
+    else:
+        led.duty_u16(1500)
+
 
 controllers = []
 wake_controller_macs = set()
@@ -1638,6 +1664,16 @@ while True:
     if system_on:
 
         if (
+            ps_on.value() == 0
+            and startup_started is None
+        ):
+            # The host is up but we are not asserting PS_ON: the XIAO was reset,
+            # or the PSU was started with the always-on jumper. On the BC-250
+            # Wake board Q2 is holding PS_ON in hardware; take over so the
+            # shutdown paths below release it in step.
+            ps_on.value(1)
+
+        if (
             ble_scanning
             and scan_mode == "wake"
         ):
@@ -1715,6 +1751,21 @@ while True:
 
             stop_ble_scan()
             stop_wifi()
+
+            if system_on:
+                # Q2 holds PS_ON in hardware while HOST_ON is high, so releasing
+                # GPIO5 alone would do nothing. Hold the BC-250's own power
+                # button instead: its hard-off drops HOST_ON and the hardware
+                # hold releases with it.
+                print(
+                    "Holding BC-250 power button",
+                    FORCE_OFF_PRESS_MS,
+                    "ms"
+                )
+                bc250_button.value(1)
+                sleep_ms(FORCE_OFF_PRESS_MS)
+                bc250_button.value(0)
+                sleep_ms(500)
 
             bc250_button.value(0)
             ps_on.value(0)
@@ -1865,6 +1916,8 @@ while True:
 
             reset_wake_hits()
 
+
+    update_led(system_on)
 
     last_button = button_now
 

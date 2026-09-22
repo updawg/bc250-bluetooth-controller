@@ -1,5 +1,12 @@
 # BC-250 Bluetooth Power Controller
 
+> **This fork targets the [BC-250 Wake board](https://github.com/updawg/bc250-wake)**: a single PCB that
+> replaces the mosfet.party FSP500-30AS PS_ON adapter and carries the XIAO ESP32-C3 in a socket.
+> Differences from upstream: the BC-250 power-button output is on **GPIO7** (D5) instead of GPIO2, a
+> ring/status **LED on GPIO6** (D4), force-off holds the BC-250's power button for 5.5 s because the board
+> holds PS_ON in hardware while the BC-250 runs, and the firmware re-arms its PS_ON state after a XIAO reset.
+> `release/` is prebuilt with these settings. Everything else is unchanged from upstream.
+
 Turn an AMD BC-250 into a much more console-like living-room system by giving it controller-triggered power-on, physical power-button handling, graceful shutdown support, and a small web UI for managing wake devices.
 
 This project uses a **Seeed Studio XIAO ESP32-C3** running **MicroPython**. The ESP stays powered from PSU standby power, watches for configured Bluetooth LE advertisements while the BC-250 is off, and asserts the PSU / BC-250 power controls when a known controller appears.

@@ -1,5 +1,9 @@
 # Wiring Guide
 
+> **BC-250 Wake board users:** none of the hand wiring below applies; the board carries all of it. Its pin map
+> is `PIN_BC250_BUTTON = 7`, `PIN_BC250_SENSE = 3`, `PIN_CASE_BUTTON = 4`, `PIN_PS_ON = 5`, `PIN_LED = 6`,
+> already set in this fork's `config.py`. See https://github.com/updawg/bc250-wake for the board.
+
 This document covers the **tested logical wiring arrangement** for the BC-250 Bluetooth Power Controller using a **Seeed Studio XIAO ESP32-C3**.
 
 The ESP is powered continuously from the PSU's standby supply, controls the PSU's main-power enable line through an external transistor interface, emulates the BC-250 motherboard power button through a second transistor interface, reads a BC-250 running-state signal, and reads a physical case button.
